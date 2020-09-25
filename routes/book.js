@@ -80,26 +80,10 @@ router.post('/:id/delete/', asyncHandler(async (req ,res) => {
   }
 }));
 
-router.post('search/', asyncHandler(async (req, res) => {
-  let attributes = [];
-  let where = {};
+router.post('/search', asyncHandler(async(req, res) => {
 
-  for (const key in req.body) {
-    if(key) {
-      attributes.push(key);
-      if(key === 'year') {
-        where.year = req.body[key];
-      }
-      [key] = {
-        [Op.like]: `%${req.body[key]}%`,
-        [Op.iLike]: `%${req.body[key]}%`
-      }
-      where[key] = [key]
-    }
-  }
-  console.log(where);
-  res.redirect('/')
-}));
+  res.send("Search Route Works!")
+}))
 
 
 module.exports = router;
