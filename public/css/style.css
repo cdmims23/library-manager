@@ -92,6 +92,23 @@ input[type=text] {
   width: 300px;
 }
 
+#search {
+  display: flex;
+  margin: 1.5rem 0;
+}
+
+#search #title, #search #author, #search #genre {
+  flex-basis: 200px;
+}  
+
+#search #year {
+  flex-basis: 100px;
+}
+
+#search-button {
+  margin: 0 1.5rem;
+}
+
 .error {
   color: rgb(236, 15, 15);
 }

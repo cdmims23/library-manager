@@ -19,6 +19,7 @@
   "homepage": "https://github.com/cdmims23/library-manager#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "http-errors": "^1.8.0",
     "pug": "^3.0.0",
     "sequelize": "^6.3.5",
     "sqlite3": "^5.0.0"

@@ -4,7 +4,14 @@ block content
     h1 Books
 
     p
-    a.button(href='books/new') Create New Book
+    a.button(href='/book/new') Create New Book
+
+    form(method="post", action="book/search", id="search")
+        input.search(name="title", type="text", id="title", placeholder="Search by title")
+        input.search(name="author", type="text", id="author", placeholder="Search by author")
+        input.search(name="genre", type="text", id="genre", placeholder="Search by genre")
+        input.search(name="year", type="text", id="year", placeholder="Search by year")
+        input(type="submit", value="Search", id="search-button")
 
     table
         thead
@@ -17,7 +24,7 @@ block content
         each book in books
             tr 
                 td
-                    a(href="/books/" + book.id)=book.title
+                    a(href="/book/" + book.id)=book.title
                 td= book.author
                 td= book.genre
                 td= book.year

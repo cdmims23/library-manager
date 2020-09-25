@@ -2,6 +2,7 @@ extends layout.pug
 
 block content
     h1 New Book
+    include errors
     form(action="new", method="post")
         p
             label(for="title") Title
@@ -20,7 +21,7 @@ block content
             input(name="year", type="text", id="year")
 
         p
-            input(type="submit", value="Create New Book")
+            input(type="submit", value="Create New Book" id="search-button")
 
         p
             a(class="button", href="/") Cancel
