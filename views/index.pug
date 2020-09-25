@@ -6,7 +6,7 @@ block content
     p
     a.button(href='/book/new') Create New Book
 
-    form(method="post", action="book/search", id="search")
+    form(action="book/search", method="post", id="search")
         input.search(name="title", type="text", id="title", placeholder="Search by title")
         input.search(name="author", type="text", id="author", placeholder="Search by author")
         input.search(name="genre", type="text", id="genre", placeholder="Search by genre")

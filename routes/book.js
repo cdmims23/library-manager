@@ -1,7 +1,9 @@
 const express = require('express');
+const { sequelize } = require('../models');
+const {Sequelize} = require('../models');
 const router = express.Router();
 const Book = require('../models').Book;
-
+const Op = Sequelize.Op
 /* Handler function to wrap each route. */
 function asyncHandler(cb){
     return async(req, res, next) => {
@@ -13,9 +15,27 @@ function asyncHandler(cb){
     }
   }
 
+
 router.get('/', asyncHandler(async (req, res, next) => {
   const books = await Book.findAll();
   res.render('index', { books });
+}));
+
+router.post('/search', asyncHandler(async (req, res) => {
+  let attributes = [];
+  let where = {[Op.or]: {}};
+
+  for(const key in req.body) {
+    if(req.body[key]) {
+      attributes.push(key);
+        where[Op.or][key] = {[Op.like]: `%${req.body[key]}%`}
+    }
+  }
+  const books = await Book.findAll({where: where})
+  console.log(books);
+  console.log(attributes);
+  console.log(where);
+  res.render('index', {books});
 }));
 
 router.get('/new', asyncHandler(async (req, res) => {
@@ -25,7 +45,6 @@ router.get('/new', asyncHandler(async (req, res) => {
 router.post('/new', asyncHandler(async (req, res) => {
   let book;
   try {
-    console.log(req.body);
     book = await Book.create(req.body);
     res.redirect("/");
   } catch (error) {
@@ -78,27 +97,6 @@ router.post('/:id/delete/', asyncHandler(async (req ,res) => {
   } else {
     res.sendStatus(404);
   }
-}));
-
-router.post('search/', asyncHandler(async (req, res) => {
-  let attributes = [];
-  let where = {};
-
-  for (const key in req.body) {
-    if(key) {
-      attributes.push(key);
-      if(key === 'year') {
-        where.year = req.body[key];
-      }
-      [key] = {
-        [Op.like]: `%${req.body[key]}%`,
-        [Op.iLike]: `%${req.body[key]}%`
-      }
-      where[key] = [key]
-    }
-  }
-  console.log(where);
-  res.redirect('/')
 }));
 
 

@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routers
-const routes = require('./routes');
+const routes = require('./routes/index');
 const books = require('./routes/book');
 
 app.use('/', routes);
