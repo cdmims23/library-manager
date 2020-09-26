@@ -24,22 +24,10 @@ module.exports = (sequelize) => {
               validate: {
                   notEmpty: {
                       msg: '"Author" is required'
-                  },
-                  is: {
-                    args: /^[a-zA-Z]+$/,
-                    msg: "'Author' cannot contain numbers"
                   }
               }
           },
-          genre: {
-            type: Sequelize.STRING,
-            validate: {
-              is: {
-                args: /^[a-zA-Z]+$/,
-                msg: "'Genre' cannot contain numbers"
-              }
-            }
-          },
+          genre: Sequelize.STRING,
           year: Sequelize.INTEGER 
     }, { sequelize });
 

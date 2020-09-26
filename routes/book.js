@@ -23,15 +23,14 @@ router.get('/', asyncHandler(async (req, res, next) => {
 
 // Route for search feature
 router.post('/search', asyncHandler(async (req, res) => {
-  let attributes = [];
   let where = {[Op.or]: {}};
-
-  for(const key in req.body) {
-    if(req.body[key] && key) {
-      attributes.push(key);
-        where[Op.or][key] = {[Op.like]: `%${req.body[key]}%`}
+    if(req.body.search) {
+      where[Op.or]['title'] = {[Op.like]: `%${req.body['search']}%`}
+      where[Op.or]['author'] = {[Op.like]: `%${req.body['search']}%`}
+      where[Op.or]['genre'] = {[Op.like]: `%${req.body['search']}%`}
+      where[Op.or]['year'] = {[Op.like]: `%${req.body['search']}%`}
     }
-  }
+    
   const books = await Book.findAll({where: where})
   res.render('index', {books, search: true});
 }));
@@ -50,7 +49,7 @@ router.post('/new', asyncHandler(async (req, res) => {
   } catch (error) {
     if(error.name === "SequelizeValidationError") {
       book = await Book.build(req.body);
-      res.render("new-book", { book, errors: error.errors})
+      res.render("form-error", { book, errors: error.errors})
     } else {
       throw error;
     }  

@@ -3,7 +3,7 @@ extends layout.pug
 block content
     h1 Update Book
 
-    include errors
+    include error
     
     form(action="/book/" + book.id, method="post")
         p 

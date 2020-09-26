@@ -7,10 +7,7 @@ block content
         p
         a.button(href='/book/new') Create New Book
         form(action="book/search", method="post", id="search")
-            input.search(name="title", type="text", id="title", placeholder="Search by title")
-            input.search(name="author", type="text", id="author", placeholder="Search by author")
-            input.search(name="genre", type="text", id="genre", placeholder="Search by genre")
-            input.search(name="year", type="text", id="year", placeholder="Search by year")
+            input.search(name="search", type="text", id="search", placeholder="Search")
             input(type="submit", value="Search", id="search-button")
     else 
         a(href="/") Back

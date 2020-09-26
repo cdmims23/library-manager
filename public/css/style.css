@@ -96,14 +96,7 @@ input[type=text] {
 #search {
   display: flex;
   margin: 1.5rem 0;
-}
-
-#search #title, #search #author, #search #genre {
-  flex-basis: 200px;
-}  
-
-#search #year {
-  flex-basis: 100px;
+  align-items: baseline;
 }
 
 #search-button {
