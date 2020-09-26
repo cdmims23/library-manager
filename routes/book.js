@@ -17,7 +17,7 @@ function asyncHandler(cb){
 
 
 router.get('/', asyncHandler(async (req, res, next) => {
-  const books = await Book.findAll();
+  const books = await Book.findAll({order: [['author', 'ASC']]});
   res.render('index', { books, search: false });
 }));
 
@@ -31,7 +31,7 @@ router.post('/search', asyncHandler(async (req, res) => {
       where[Op.or]['year'] = {[Op.like]: `%${req.body['search']}%`}
     }
     
-  const books = await Book.findAll({where: where})
+  const books = await Book.findAll({where, order: [['author', 'ASC']]})
   res.render('index', {books, search: true});
 }));
 
