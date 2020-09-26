@@ -21,6 +21,7 @@ router.get('/', asyncHandler(async (req, res, next) => {
   res.render('index', { books, search: false });
 }));
 
+// Route for search feature
 router.post('/search', asyncHandler(async (req, res) => {
   let attributes = [];
   let where = {[Op.or]: {}};
@@ -32,12 +33,11 @@ router.post('/search', asyncHandler(async (req, res) => {
     }
   }
   const books = await Book.findAll({where: where})
-  console.log(books);
-  console.log(attributes);
-  console.log(where);
   res.render('index', {books, search: true});
 }));
 
+
+// GET and POST routes to add new books
 router.get('/new', asyncHandler(async (req, res) => {
   res.render('new-book', {});
 }));
@@ -57,11 +57,13 @@ router.post('/new', asyncHandler(async (req, res) => {
   }
 }));
 
+// GET and POST routes to update books.
 router.get('/:id/', (async (req, res, next) => {
   const book = await Book.findByPk(req.params.id);
   if(book) {
     res.render("update-book", { book });      
   } else {
+    // Error handling for books that don't exist
     const error = new Error("Oh No! That book doesn't exist");
     error.status = 404;
     next(error)
@@ -89,6 +91,7 @@ router.post('/:id/', (async (req, res) => {
   }
 }));
 
+// Delete route
 router.post('/:id/delete/', asyncHandler(async (req ,res) => {
   const book = await Book.findByPk(req.params.id);
   if(book) {
@@ -99,10 +102,7 @@ router.post('/:id/delete/', asyncHandler(async (req ,res) => {
   }
 }));
 
-router.post('/search', asyncHandler(async(req, res) => {
 
-  res.send("Search Route Works!")
-}))
 
 
 module.exports = router;
