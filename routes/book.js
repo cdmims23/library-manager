@@ -18,7 +18,7 @@ function asyncHandler(cb){
 
 router.get('/', asyncHandler(async (req, res, next) => {
   const books = await Book.findAll();
-  res.render('index', { books });
+  res.render('index', { books, search: false });
 }));
 
 router.post('/search', asyncHandler(async (req, res) => {
@@ -26,7 +26,7 @@ router.post('/search', asyncHandler(async (req, res) => {
   let where = {[Op.or]: {}};
 
   for(const key in req.body) {
-    if(req.body[key]) {
+    if(req.body[key] && key) {
       attributes.push(key);
         where[Op.or][key] = {[Op.like]: `%${req.body[key]}%`}
     }
@@ -35,7 +35,7 @@ router.post('/search', asyncHandler(async (req, res) => {
   console.log(books);
   console.log(attributes);
   console.log(where);
-  res.render('index', {books});
+  res.render('index', {books, search: true});
 }));
 
 router.get('/new', asyncHandler(async (req, res) => {
