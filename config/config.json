@@ -6,14 +6,5 @@
   "test": {
     "dialect": "sqlite",
     "storage": "test.db"
-  },
-  "production": {
-    "username": "hfiuqjaxgewfvw",
-    "password": "72f3ce6289a9156ef5df6ead828907978ba3ab59913d09c590cf1319d05d5efe",
-    "database": "djgj4fhbsfohr",
-    "host": "ec2-54-86-57-171.compute-1.amazonaws.com",
-    "dialect": "postgres",
-    "port": 5432,
-    "use_env_variable": "DATABASE_URL" 
   }
 }
