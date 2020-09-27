@@ -8,7 +8,11 @@
     "storage": "test.db"
   },
   "production": {
-    "dialect": "sqlite",
-    "storage": "library.db"
+    "username": "hfiuqjaxgewfvw",
+    "password": "72f3ce6289a9156ef5df6ead828907978ba3ab59913d09c590cf1319d05d5efe",
+    "database": "library",
+    "host": "ec2-54-86-57-171.compute-1.amazonaws.com",
+    "dialect": "postgres",
+    "port": 5432
   }
 }
